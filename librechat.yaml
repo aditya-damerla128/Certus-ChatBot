@@ -14,6 +14,9 @@ interface:
   bookmarks: true
   multiConvo: true
   agents: true
+  defaultModel:
+    endpoint: 'Ollama (ozwell)'
+    model: 'gpt-oss:20b'
 
 registration:
   socialLogins: ['github', 'google', 'discord']
@@ -47,6 +50,17 @@ endpoints:
       - batch_drug_analysis
     mcpServers: ['certus']
   custom:
+    - name: 'Ollama (ozwell)'
+      apiKey: 'ollama'   # not used by Ollama, but LibreChat expects a value
+      baseURL: 'https://ollama-ozwell-fw.opensource.mieweb.org/v1'
+      models:
+        default: ['gpt-oss:latest']   # change to whatever /v1/models or /api/tags shows
+        fetch: true               # LibreChat will try to fetch models
+      titleConvo: true
+      titleModel: 'gpt-oss:latest'
+      modelDisplayLabel: 'Ollama'
+      tools: true
+
     - name: 'Certus Medical'
       apiKey: '${OPENAI_API_KEY}'
       baseURL: 'https://api.openai.com/v1'
@@ -83,17 +97,6 @@ endpoints:
       titleConvo: true
       titleModel: 'gpt-3.5-turbo'
       modelDisplayLabel: 'OpenAI'
-
-    - name: 'Ollama (ozwell)'
-      apiKey: 'ollama'   # not used by Ollama, but LibreChat expects a value
-      baseURL: 'https://ollama-ozwell-fw.opensource.mieweb.org/v1'
-      models:
-        default: ['gpt-oss:20b']   # change to whatever /v1/models or /api/tags shows
-        fetch: true               # LibreChat will try to fetch models
-      titleConvo: true
-      titleModel: 'gpt-oss:20b'
-      modelDisplayLabel: 'Ollama'
-      tools: true
 
 fileConfig:
   endpoints:
