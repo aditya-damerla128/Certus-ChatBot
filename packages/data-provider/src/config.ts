@@ -911,6 +911,7 @@ export enum KnownEndpoints {
   fireworks = 'fireworks',
   deepseek = 'deepseek',
   groq = 'groq',
+  helicone = 'helicone',
   huggingface = 'huggingface',
   mistral = 'mistral',
   mlx = 'mlx',
@@ -926,6 +927,7 @@ export enum KnownEndpoints {
 
 export enum FetchTokenConfig {
   openrouter = KnownEndpoints.openrouter,
+  helicone = KnownEndpoints.helicone,
 }
 
 export const defaultEndpoints: EModelEndpoint[] = [
@@ -958,9 +960,14 @@ export const alternateName = {
   [KnownEndpoints.deepseek]: 'DeepSeek',
   [KnownEndpoints.xai]: 'xAI',
   [KnownEndpoints.vercel]: 'Vercel',
+  [KnownEndpoints.helicone]: 'Helicone',
 };
 
 const sharedOpenAIModels = [
+  'gpt-5.1',
+  'gpt-5.1-chat-latest',
+  'gpt-5.1-codex',
+  'gpt-5.1-codex-mini',
   'gpt-5',
   'gpt-5-mini',
   'gpt-5-nano',
@@ -996,6 +1003,7 @@ const sharedAnthropicModels = [
   'claude-haiku-4-5-20251001',
   'claude-opus-4-1',
   'claude-opus-4-1-20250805',
+  'claude-opus-4-5',
   'claude-sonnet-4-20250514',
   'claude-sonnet-4-0',
   'claude-opus-4-20250514',
@@ -1125,6 +1133,7 @@ export const supportsBalanceCheck = {
   [EModelEndpoint.azureAssistants]: true,
   [EModelEndpoint.azureOpenAI]: true,
   [EModelEndpoint.bedrock]: true,
+  [EModelEndpoint.google]: true,
 };
 
 export const visionModels = [
@@ -1455,6 +1464,10 @@ export enum ErrorTypes {
    * Generic Authentication failure
    */
   AUTH_FAILED = 'auth_failed',
+  /**
+   * Model refused to respond (content policy violation)
+   */
+  REFUSAL = 'refusal',
 }
 
 /**
@@ -1573,7 +1586,7 @@ export enum TTSProviders {
 /** Enum for app-wide constants */
 export enum Constants {
   /** Key for the app's version. */
-  VERSION = 'v0.8.1-rc1',
+  VERSION = 'v0.8.1',
   /** Key for the Custom Config's version (librechat.yaml). */
   CONFIG_VERSION = '1.3.1',
   /** Standard value for the first message's `parentMessageId` value, to indicate no parent exists. */
