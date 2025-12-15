@@ -16,7 +16,7 @@ interface:
   agents: true
   defaultModel:
     endpoint: 'Ollama (ozwell)'
-    model: 'gpt-oss:20b'
+    model: 'gpt-oss:latest'
 
 registration:
   socialLogins: ['github', 'google', 'discord']
